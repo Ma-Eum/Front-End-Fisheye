@@ -14,7 +14,6 @@ header {
     align-items: center;
     height: 90px;
     background-color: #FFFFFF;
-    border-bottom: 1px solid #E5E5E5;
 }
 
 h1 {
@@ -35,13 +34,13 @@ a{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 70px;
+    background-color: #FFFFFF;
     padding: 50px;
 }
 
 .photographer_section article {
     background-color: #FFFFFF;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .photographer_section article a{

@@ -39,37 +39,49 @@ h1 {
     flex-direction: column;
     align-items: center;
     background-color: #FFFFFF;
-    padding: 20px;
+    gap: 3px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .photographer_section article h2 {
     color: #D3573C;
-    font-size: 24px;
-    margin: 10px 0 5px;
+    font-size: 36px;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.photographer_section article .image-container {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
 .photographer_section article img {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.2); /* Appliquer un zoom à l'intérieur */
 }
 
 .location, .tagline, .price {
     color: #525252;
-    margin: 5px 0;
+    margin: 0;
 }
 
 .location {
-    font-weight: bold;
+    font-size: 13px;
+    color: #901C1C;
 }
 
 .tagline {
-    font-style: italic;
+    font-size: 10px;
+    color: black;
 }
 
 .price {
-    color: #D3573C;
-    font-weight: bold;
+    font-size: 9px;
+    color: #757575;
 }

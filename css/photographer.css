@@ -249,32 +249,136 @@ p{
     color: red;
 }
 
+/* Modale */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #DB8876;
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal header h2 {
+    font-size: 24px;
+    color: #000;
+}
+
+.modal header img {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-size: 18px;
+    color: #312E2E;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.contact_button {
+    align-self: flex-end;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #901C1C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.contact_button:hover {
+    background-color: #D3573C;
+}
+
+#contact_modal[aria-hidden="true"] {
+    display: none;
+}
+
+#contact_modal[aria-hidden="false"] {
+    display: block;
+}
+
+/* Modale */
 
 .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    z-index: 1000;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
 }
 
 .modal header {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
 .modal header img {
     cursor: pointer;
+    width: 42px;
+    height: 42px;
 }
 
-.modal header h2 {
+.modal header h2,
+#photographer-name-modal {
     font-size: 64px;
     font-weight: normal;
     text-align: center;
+    color: #000;
+    margin: 0;
+}
+
+
+#photographer-name-modal{
+    text-align: start;
+    padding-bottom: 15px;
 }
 
 form {
@@ -282,6 +386,7 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
+    gap: 15px;
 }
 
 form label {
@@ -297,11 +402,44 @@ form div {
     margin-bottom: 26px;
 }
 
-form input {
-    width: 100%;
+form input,
+form textarea {
+    width: 100%; /* Assure que l'élément prend toute la largeur du conteneur parent */
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la taille totale de l'élément */
+    resize: vertical; /* Permet à l'utilisateur de redimensionner verticalement, mais pas horizontalement */
+}
+
+form textarea {
+    height: 150px; /* Définissez une hauteur appropriée pour le textarea */
+    max-width: 100%; /* S'assure que le textarea ne dépasse pas la largeur du conteneur */
+}
+
+.contact_button {
+    align-self: flex-start;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #901C1C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.contact_button:hover {
+    background-color: #D3573C;
+}
+
+#contact_modal[aria-hidden="true"] {
+    display: none;
+}
+
+#contact_modal[aria-hidden="false"] {
+    display: block;
 }
 
 

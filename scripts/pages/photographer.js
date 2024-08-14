@@ -68,6 +68,9 @@ async function displayPhotographerData() {
     document.querySelector('.photographer-portrait img').setAttribute('src', `assets/images/Photos/${photographer.portrait}`);
     document.querySelector('.photographer-portrait img').setAttribute('alt', photographer.name);
 
+    // Mise à jour du nom dans la modale
+    document.getElementById('photographer-name-modal').textContent = photographer.name;
+
     // Mise à jour de la galerie de médias
     const mediaGallery = document.querySelector('.media-gallery');
     media.forEach(mediaItem => {
@@ -79,7 +82,11 @@ async function displayPhotographerData() {
     // Mise à jour du tarif journalier
     document.getElementById('daily-price').textContent = `${photographer.price}€/jour`;
 }
-displayPhotographerData();
+displayPhotographerData().then(() => {
+    // Lier l'ouverture de la modale une fois que les données sont affichées
+    document.querySelector('.contact_button').addEventListener('click', displayModal);
+});
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const selectContainer = document.querySelector('.custom-select');
@@ -116,6 +123,35 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+function displayModal() {
+    const photographerName = document.querySelector('.photographer-name').textContent;
+    document.getElementById('photographer-name-modal').textContent = photographerName;
+    document.getElementById('contact_modal').style.display = "block";
+    document.querySelector('.modal').focus();
+}
+
+document.querySelector('.modal form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Empêche le rechargement de la page
+
+    // Ici, vous pouvez récupérer les données du formulaire
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Affiche les données dans la console pour vérification
+    console.log('Prénom:', firstName);
+    console.log('Nom:', lastName);
+    console.log('Email:', email);
+    console.log('Message:', message);
+
+    // Vous pouvez ensuite fermer la modale ou réinitialiser le formulaire si nécessaire
+    document.getElementById('contact_modal').style.display = "none";
+    document.querySelector('.modal form').reset();
+});
+
+
 
 
 

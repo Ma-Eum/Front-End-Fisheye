@@ -9,7 +9,9 @@
 </head>
 <body>
     <header>
-        <img src="assets/images/logo.png" class="logo" alt="Fisheye logo" />
+        <a href="./index.html">
+            <img src="assets/images/logo.png" class="logo" alt="Fisheye logo"/>
+        </a>
     </header>
 
     <main id="main">
@@ -59,28 +61,30 @@
         </div>
     </div>
 
-    <div id="contact_modal" style="display:none;">
-        <div class="modal">
+    <div id="contact_modal" class="modal" role="dialog" aria-labelledby="contact-modal-title" aria-hidden="true">
+        <div class="modal-content">
             <header>
-                <h2>Contactez-moi</h2>
-                <img src="assets/icons/close.svg" onclick="closeModal()" />
+                <h2 id="contact-modal-title">Contactez-moi</h2>
+                <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la modale" tabindex="0" />
             </header>
+            <!-- Nom du photographe -->
+            <p id="photographer-name-modal"></p>
             <form>
                 <div>
-                    <label>Prénom</label>
-                    <input type="text" />
+                    <label for="first-name">Prénom</label>
+                    <input type="text" id="first-name" name="first-name" required />
                 </div>
                 <div>
-                    <label>Nom</label>
-                    <input type="text" />
+                    <label for="last-name">Nom</label>
+                    <input type="text" id="last-name" name="last-name" required />
                 </div>
                 <div>
-                    <label>Email</label>
-                    <input type="email" />
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required />
                 </div>
                 <div>
-                    <label>Votre message</label>
-                    <textarea></textarea>
+                    <label for="message">Votre message</label>
+                    <textarea id="message" name="message" required></textarea>
                 </div>
                 <button class="contact_button" type="submit">Envoyer</button>
             </form>

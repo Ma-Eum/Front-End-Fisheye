@@ -21,10 +21,6 @@ p{
 
 /* Section 1: Informations du photographe */
 
-#contact_modal {
-    display: none;
-}
-
 .photograph-header {
     display: flex;
     justify-content: space-between;

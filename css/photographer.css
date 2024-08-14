@@ -125,6 +125,7 @@ p{
 .select-arrow {
     margin-left: 10px;
     font-size: 12px;
+    transition: transform 0.3s ease;
 }
     
 .select-options {
@@ -169,7 +170,6 @@ p{
 }
 
 .select-active .select-arrow {
-    content: "▲";
     transform: rotate(180deg);
 }
 

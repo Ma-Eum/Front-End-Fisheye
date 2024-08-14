@@ -1,11 +1,61 @@
+body {
+    font-family: "DM Sans", sans-serif;
+    padding: 43px 100px;
+    background-color: #FAFAFA;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+p{
+    margin: 0;
+}
+
+.logo {
+    width: 200px;
+    height: 50px;
+}
+
+/* Section 1: Informations du photographe */
+
 #contact_modal {
     display: none;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.photographer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.photographer-name {
+    font-size: 64px;
+    color: #D3573C;
+    margin: 0;
+}
+
+.photographer-location {
+    font-size: 24px;
+    color: #901C1C;
+}
+
+.photographer-tagline {
+    font-size: 18px;
+    color: #525252;
+}
+
+.contact-button-container {
+    margin-right: 50px;
 }
 
 .contact_button {
@@ -20,6 +70,185 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.contact_button:hover {
+    background-color: #D3573C;
+    color: black;
+}
+
+.photographer-portrait img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Section 2: Galerie de médias */
+.media-filter {
+    padding: 20px 0;
+    background-color: #FFFFFF;
+}
+
+.sort-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sort-section span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    background-color: #901C1C;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.select-selected {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px; /* Hériter de la bordure arrondit du parent*/ 
+    z-index: 1; /* S'assure qu'il reste en haut de .select-options */
+    position: relative;
+}
+
+.select-arrow {
+    margin-left: 10px;
+    font-size: 12px;
+}
+    
+.select-options {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;  /* Garantit que les options déroulantes apparaissent sous l'élément sélectionné */
+    left: 0;
+    right: 0;
+    background-color: #901C1C;
+    z-index: 99;
+    border-radius: 0 0 5px 5px;
+}
+
+.select-options .select-option {
+    padding: 10px;
+    position: relative;
+    cursor: pointer; /* On s'assure que les éléments enfants comme la bordure peuvent être positionnés correctement */
+}
+
+.select-options .select-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background-color: #D3573C;
+}
+
+.select-options .select-option:hover {
+    background-color: #D3573C;
+}
+
+.select-active {
+    border-radius: 5px 5px 0 0; /* Bord arrondit seulement en haut */
+}
+
+.select-active .select-options {
+    display: flex;
+    border-radius: 0 0 5px 5px; 
+}
+
+.select-active .select-arrow {
+    content: "▲";
+    transform: rotate(180deg);
+}
+
+.media-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+}
+
+.media-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 351px;
+    overflow: hidden;
+}
+
+.media-item img,
+.media-item video {
+    width: 100%;
+    min-height: 300px;
+    object-fit: cover; /* S'assure que l'image ou la vidéo s'adapte à l'intérieur de l'élément sans déformation */
+    object-position: center; /* Centre l'image ou la vidéo dans l'élément */
+    border-radius: 8px; /* Ajoute des coins arrondis si nécessaire */
+}
+
+.media-item .media-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour le texte */
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.media-item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #901C1C;
+}
+
+.media-item-details .likes {
+    cursor: pointer;
+}
+
+/* Section 3: Barre fixe en bas */
+.fixed-bar {
+    position: fixed;
+    bottom: 0;
+    right: 36px;
+    background-color: #DB8876;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.total-likes {
+    font-size: 24px;
+    color: black;
+}
+
+.daily-price {
+    font-size: 24px;
+    color: black;
+}
+
+.heart {
+    color: red;
+}
+
 
 .modal {
     border-radius: 5px;
@@ -73,4 +302,22 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+    .photograph-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .media-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .fixed-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
 }

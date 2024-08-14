@@ -1,37 +1,94 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+<html lang="fr">
+<head>
+    <link href="css/photographer.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
+    <title>Fisheye - Photographe</title>
+</head>
+<body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye logo" />
     </header>
+
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+        <!-- Section 1: Informations du photographe -->
+        <section class="photograph-header">
+            <div class="photographer-details">
+                <h1 class="photographer-name"></h1>
+                <p class="photographer-location"></p>
+                <p class="photographer-tagline"></p>
+            </div>
+            <div class="contact-button-container">
+                <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+            </div>
+            <div class="photographer-portrait">
+                <img src="" alt="Photo du photographe" />
+            </div>
+        </section>
+
+        <!-- Section 2: Galerie de médias -->
+        <section class="media-filter">
+            <div class="sort-section">
+                <span>Trier par</span>
+                <div class="custom-select">
+                    <div class="select-selected" data-value="popularity">Popularité
+                        <span class="select-arrow">▼</span>
+                    </div>
+                    <div class="select-options">
+                        <div class="select-option" data-value="popularity">Popularité</div>
+                        <div class="select-option" data-value="date">Date</div>
+                        <div class="select-option" data-value="title">Titre</div>
+                    </div>
+                </div>
+            </div>
+            <div class="media-gallery">
+                <!-- Media items will be inserted here -->
+            </div>
+        </section>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+
+    <!-- Section 3: Barre fixe en bas -->
+    <div class="fixed-bar">
+        <div class="total-likes">
+            <span id="total-likes">0</span> ❤
+        </div>
+        <div class="daily-price">
+            <span id="daily-price">0€/jour</span>
+        </div>
+    </div>
+
+    <div id="contact_modal" style="display:none;">
+        <div class="modal">
+            <header>
+                <h2>Contactez-moi</h2>
+                <img src="assets/icons/close.svg" onclick="closeModal()" />
+            </header>
+            <form>
+                <div>
+                    <label>Prénom</label>
+                    <input type="text" />
+                </div>
+                <div>
+                    <label>Nom</label>
+                    <input type="text" />
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" />
+                </div>
+                <div>
+                    <label>Votre message</label>
+                    <textarea></textarea>
+                </div>
+                <button class="contact_button" type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/moduls/mediaFactory.js"></script>
+    <script src="scripts/pages/photographer.js"></script>
+    <script src="scripts/utils/contactForm.js"></script>
+</body>
 </html>

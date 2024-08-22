@@ -82,6 +82,10 @@ async function displayPhotographerData() {
     // Mise à jour du tarif journalier
     document.getElementById('daily-price').textContent = `${photographer.price}€/jour`;
 
+    // Calcul du nombre total de likes
+    const totalLikes = media.reduce((total, item) => total + item.likes, 0);
+    document.getElementById('total-likes').textContent = totalLikes;
+
     // Attacher les événements de la Lightbox après le rendu des médias
     initializeLightbox();
 }

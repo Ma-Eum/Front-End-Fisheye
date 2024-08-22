@@ -27,6 +27,11 @@ function mediaFactory(media) {
         const likesEl = document.createElement('span');
         likesEl.classList.add('likes');
         likesEl.textContent = `${totalLikes} ❤`;
+        likesEl.addEventListener('click', () => {
+            totalLikes += 1;
+            likesEl.textContent = `${totalLikes} ❤`;
+            updateTotalLikes(1);
+        });
 
         const detailsEl = document.createElement('div');
         detailsEl.classList.add('media-item-details');
@@ -37,6 +42,12 @@ function mediaFactory(media) {
         article.appendChild(detailsEl);
 
         return article;
+    }
+
+    function updateTotalLikes(increment) {
+        const totalLikesEl = document.getElementById('total-likes');
+        let currentLikes = parseInt(totalLikesEl.textContent);
+        totalLikesEl.textContent = currentLikes + increment;
     }
 
     return { getMediaDOM };

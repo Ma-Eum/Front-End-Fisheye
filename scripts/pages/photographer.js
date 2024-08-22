@@ -1,4 +1,4 @@
-//Mettre le code JavaScript lié à la page photographer.html
+// Code JavaScript lié à la page photographer.html
 
 function photographerTemplate(data) {
     const { name, portrait, city, country, tagline, price } = data;
@@ -48,7 +48,6 @@ async function getPhotographerById(id) {
 async function getMediaByPhotographerId(id) {
     const response = await fetch('data/photographers.json');
     const data = await response.json();
-    // Nous filtrons les médias appartenant au photographe avec l'ID correspondant
     return data.media.filter(media => media.photographerId == id);
 }
 
@@ -73,6 +72,7 @@ async function displayPhotographerData() {
 
     // Mise à jour de la galerie de médias
     const mediaGallery = document.querySelector('.media-gallery');
+    mediaGallery.innerHTML = '';  // Effacer les éléments multimédias existants
     media.forEach(mediaItem => {
         const mediaModel = mediaFactory(mediaItem);
         const mediaDOM = mediaModel.getMediaDOM();
@@ -81,12 +81,100 @@ async function displayPhotographerData() {
 
     // Mise à jour du tarif journalier
     document.getElementById('daily-price').textContent = `${photographer.price}€/jour`;
+
+    // Attacher les événements de la Lightbox après le rendu des médias
+    initializeLightbox();
 }
+
+function initializeLightbox() {
+    const lightbox = document.getElementById('lightbox_modal');
+    const lightboxMedia = lightbox.querySelector('.lightbox-media');
+    const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+    let currentIndex = 0;
+    let mediaItems = [];
+
+    function openLightbox(index) {
+        currentIndex = index;
+        updateLightboxContent(mediaItems[currentIndex]);
+        lightbox.setAttribute('aria-hidden', 'false');
+        lightbox.style.display = 'flex'; // Affiche la lightbox
+        lightbox.focus();
+    }
+
+    function closeLightbox() {
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightbox.style.display = 'none'; // Cache la lightbox
+    }
+
+    function updateLightboxContent(mediaItem) {
+        lightboxMedia.innerHTML = '';
+        if (mediaItem.image) {
+            const img = document.createElement('img');
+            img.src = mediaItem.image;
+            img.alt = mediaItem.title;
+            lightboxMedia.appendChild(img);
+        } else if (mediaItem.video) {
+            const video = document.createElement('video');
+            video.controls = true;
+            video.innerHTML = `<source src="${mediaItem.video}" type="video/mp4">`;
+            lightboxMedia.appendChild(video);
+        }
+        lightboxCaption.textContent = mediaItem.title;
+    }
+
+    function showNextMedia() {
+        currentIndex = (currentIndex + 1) % mediaItems.length;
+        updateLightboxContent(mediaItems[currentIndex]);
+    }
+
+    function showPreviousMedia() {
+        currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
+        updateLightboxContent(mediaItems[currentIndex]);
+    }
+
+    // Collectez tous les éléments multimédias et liez les événements
+    document.querySelectorAll('.media-item img, .media-item video').forEach((element, index) => {
+        mediaItems.push({
+            image: element.tagName === 'IMG' ? element.src : null,
+            video: element.tagName === 'VIDEO' ? element.querySelector('source').src : null,
+            title: element.alt || element.getAttribute('aria-label') || 'Media'
+        });
+
+        element.addEventListener('click', () => openLightbox(index));
+    });
+
+    // Écouteurs d'événements pour les contrôles Lightbox
+    const closeButton = document.querySelector('.lightbox-close');
+    if (closeButton) {
+        closeButton.addEventListener('click', closeLightbox);
+    } else {
+        console.error('Close button not found');
+    }
+
+    document.querySelector('.lightbox-prev').addEventListener('click', showPreviousMedia);
+    document.querySelector('.lightbox-next').addEventListener('click', showNextMedia);
+
+    // Navigation au clavier
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.getAttribute('aria-hidden') === 'false') {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                showPreviousMedia();
+            } else if (e.key === 'ArrowRight') {
+                showNextMedia();
+            }
+        }
+    });
+}
+
 displayPhotographerData().then(() => {
     // Lier l'ouverture de la modale une fois que les données sont affichées
-    document.querySelector('.contact_button').addEventListener('click', displayModal);
+    const contactButton = document.querySelector('.contact_button');
+    if (contactButton) {
+        contactButton.addEventListener('click', displayModal);
+    }
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const selectContainer = document.querySelector('.custom-select');
@@ -95,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const options = Array.from(document.querySelectorAll('.select-option'));
 
     selected.addEventListener('click', function () {
-        // Remove the current selected option from the options list
+        // Supprimer l'option actuellement sélectionnée de la liste des options
         optionsContainer.innerHTML = '';
         const currentValue = selected.getAttribute('data-value');
         
@@ -113,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
             selected.innerHTML = this.innerHTML + '<span class="select-arrow">▼</span>';
             selected.setAttribute('data-value', this.getAttribute('data-value'));
             selectContainer.classList.remove('select-active');
-            // Perform your sorting logic here based on selected value
+            // Effectuez votre logique de tri ici en fonction de la valeur sélectionnée
         });
     });
 
@@ -150,8 +238,3 @@ document.querySelector('.modal form').addEventListener('submit', function(event)
     document.getElementById('contact_modal').style.display = "none";
     document.querySelector('.modal form').reset();
 });
-
-
-
-
-

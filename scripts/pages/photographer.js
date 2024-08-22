@@ -51,14 +51,30 @@ async function getMediaByPhotographerId(id) {
     return data.media.filter(media => media.photographerId == id);
 }
 
-async function displayPhotographerData() {
-    // Récupère l'ID du photographe depuis l'URL
+// Fonction pour trier les médias
+function sortMedia(media, criteria) {
+    switch (criteria) {
+        case 'popularity':
+            return media.sort((a, b) => b.likes - a.likes);
+        case 'date':
+            return media.sort((a, b) => new Date(b.date) - new Date(a.date));
+        case 'title':
+            return media.sort((a, b) => a.title.localeCompare(b.title));
+        default:
+            return media;
+    }
+}
+
+// Afficher les données du photographe et des médias
+async function displayPhotographerData(sortCriteria = 'popularity') {
     const urlParams = new URLSearchParams(window.location.search);
     const photographerId = urlParams.get('id');
 
-    // Récupère les données du photographe et des médias
     const photographer = await getPhotographerById(photographerId);
-    const media = await getMediaByPhotographerId(photographerId);
+    let media = await getMediaByPhotographerId(photographerId);
+
+    // Trier les médias en fonction du critère sélectionné
+    media = sortMedia(media, sortCriteria);
 
     // Mise à jour des informations du photographe
     document.querySelector('.photographer-name').textContent = photographer.name;
@@ -172,14 +188,7 @@ function initializeLightbox() {
     });
 }
 
-displayPhotographerData().then(() => {
-    // Lier l'ouverture de la modale une fois que les données sont affichées
-    const contactButton = document.querySelector('.contact_button');
-    if (contactButton) {
-        contactButton.addEventListener('click', displayModal);
-    }
-});
-
+// Initialiser l'affichage des données du photographe et des médias
 document.addEventListener('DOMContentLoaded', function () {
     const selectContainer = document.querySelector('.custom-select');
     const selected = document.querySelector('.select-selected');
@@ -206,16 +215,24 @@ document.addEventListener('DOMContentLoaded', function () {
             selected.setAttribute('data-value', this.getAttribute('data-value'));
             selectContainer.classList.remove('select-active');
             // Effectuez votre logique de tri ici en fonction de la valeur sélectionnée
-        });
-    });
 
-    document.addEventListener('click', function (e) {
+            // Appliquer le tri en fonction de la sélection
+            const sortCriteria = this.getAttribute('data-value');
+            displayPhotographerData(sortCriteria);
+        });
+
+    });
+       document.addEventListener('click', function (e) {
         if (!selectContainer.contains(e.target)) {
             selectContainer.classList.remove('select-active');
         }
     });
+
+    // Charger les données initialement avec le tri par popularité
+    displayPhotographerData('popularity');
 });
 
+// Fonction pour afficher la modale de contact
 function displayModal() {
     const photographerName = document.querySelector('.photographer-name').textContent;
     document.getElementById('photographer-name-modal').textContent = photographerName;
@@ -223,6 +240,7 @@ function displayModal() {
     document.querySelector('.modal').focus();
 }
 
+//Gestion de la soumission du formaulaire de contact
 document.querySelector('.modal form').addEventListener('submit', function(event) {
     event.preventDefault(); // Empêche le rechargement de la page
 

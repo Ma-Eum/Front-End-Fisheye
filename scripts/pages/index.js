@@ -23,3 +23,15 @@
     
     init();
     
+    document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('a[tabindex="0"]');
+    
+        links.forEach(link => {
+            link.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    link.click();
+                    e.preventDefault();  // Empêche le défilement de la page pour la touche Espace
+                }
+            });
+        });
+    });

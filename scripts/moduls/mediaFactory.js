@@ -5,6 +5,7 @@ function mediaFactory(media) {
     function getMediaDOM() {
         const article = document.createElement('article');
         article.classList.add('media-item');
+        article.setAttribute('tabindex','0'); //Rendre chaque article accessible par tabulation
 
         let mediaElement;
 
@@ -27,10 +28,17 @@ function mediaFactory(media) {
         const likesEl = document.createElement('span');
         likesEl.classList.add('likes');
         likesEl.textContent = `${totalLikes} ❤`;
+        likesEl.setAttribute('tabindex','0'); //Rendre chaque article accessible par tabulation
         likesEl.addEventListener('click', () => {
             totalLikes += 1;
             likesEl.textContent = `${totalLikes} ❤`;
             updateTotalLikes(1);
+        });
+
+        likesEl.addEventListener('keydown',function(e){
+            if (e.key=== 'Enter' || e.key===''){
+                likesEl.click();
+            }
         });
 
         const detailsEl = document.createElement('div');

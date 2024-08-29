@@ -234,6 +234,7 @@ p{
 .total-likes,.daily-price {
     font-size: 24px;
     color: black;
+    outline: none; /* Supprimez le contour uniquement lorsque les styles de focus sont correctement gérés, Styles ajoutés pour une meilleure accessibilité au clavier */
 }
 
 .heart {
@@ -328,7 +329,7 @@ p{
 .lightbox-caption {
     margin-top: 12px;
     margin-bottom: 12px;
-    color: #525252; /* Couleur du texte de la légende */
+    color: #901C1C; /* Couleur du texte de la légende */
     font-size: 1.2em;
     text-align: left; /* Aligne la légende à gauche */
     margin-left: 100px; /* Aligne la légende avec l'image */

@@ -112,25 +112,22 @@ function initializeLightbox() {
     const lightboxCaption = lightbox.querySelector('.lightbox-caption');
     let currentIndex = 0;
     let mediaItems = [];
-    let autoSlideTimer;
 
     function openLightbox(index) {
         currentIndex = index;
         updateLightboxContent(mediaItems[currentIndex]);
         lightbox.setAttribute('aria-hidden', 'false');
         lightbox.style.display = 'flex'; // Affiche la lightbox
-        lightbox.focus();
-        startAutoSlide(); // Démarrer le slide automatique lorsque la lightbox s'ouvre
+        lightbox.focus(); // Assure le focus sur la lightbox
     }
 
     function closeLightbox() {
         lightbox.setAttribute('aria-hidden', 'true');
         lightbox.style.display = 'none'; // Cache la lightbox
-        clearTimeout(autoSlideTimer); // Effacer la minuterie lorsque la lightbox se ferme
     }
 
     function updateLightboxContent(mediaItem) {
-        lightboxMedia.innerHTML = '';
+        lightboxMedia.innerHTML = ''; // Effacer le contenu précédent
         if (mediaItem.image) {
             const img = document.createElement('img');
             img.src = mediaItem.image;
@@ -155,20 +152,7 @@ function initializeLightbox() {
         updateLightboxContent(mediaItems[currentIndex]);
     }
 
-    function startAutoSlide() {
-        clearTimeout(autoSlideTimer); // Réinitialisez la minuterie si une interaction se produit
-        autoSlideTimer = setTimeout(() => {
-            showNextMedia();
-            startAutoSlide(); // Continuer le slide automatique
-        }, 10000); // 10 secondes d'inactivité déclenchent le slide
-    }
-
-    // Réinitialisez le minuteur du slide automatique lors de toute interaction
-    function resetAutoSlide() {
-        startAutoSlide();
-    }
-
-    // Collectez tous les éléments multimédias et liez les événements
+    // Collecte tous les éléments multimédias et attache les événements
     document.querySelectorAll('.media-item img, .media-item video').forEach((element, index) => {
         mediaItems.push({
             image: element.tagName === 'IMG' ? element.src : null,
@@ -176,26 +160,24 @@ function initializeLightbox() {
             title: element.alt || element.getAttribute('aria-label') || 'Media'
         });
 
+        // Ouvrir au clic
         element.addEventListener('click', () => openLightbox(index));
+
+        // Ouvrir avec la touche "Enter"
         element.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                openLightbox(index);
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                openLightbox(index); // Déclenche la lightbox avec la touche Entrée
             }
         });
     });
 
-    // Écouteurs d'événements pour les contrôles Lightbox
+    // Écoute des événements pour les boutons de navigation de la lightbox
     const closeButton = document.querySelector('.lightbox-close');
     if (closeButton) {
         closeButton.addEventListener('click', closeLightbox);
-    } else {
-        console.error('Close button not found');
     }
 
-    document.querySelector('.lightbox-prev').addEventListener('click', showPreviousMedia);
-    document.querySelector('.lightbox-next').addEventListener('click', showNextMedia);
-
-    // Navigation au clavier
+    // Navigation au clavier dans la lightbox
     document.addEventListener('keydown', (e) => {
         if (lightbox.getAttribute('aria-hidden') === 'false') {
             if (e.key === 'Escape') {
@@ -208,6 +190,7 @@ function initializeLightbox() {
         }
     });
 }
+
 
 // Initialiser l'affichage des données du photographe et des médias
 document.addEventListener('DOMContentLoaded', function () {

@@ -274,7 +274,8 @@ p{
 
 .lightbox-close {
     position: absolute;
-    right: 20px; /* Place la croix de fermeture près de la flèche droite */
+    right: 5px; /* Place la croix de fermeture près de la flèche droite */
+    top: 12px;
     background: none;
     border: none;
     color: #901C1C; /* Couleur de la croix */
@@ -302,15 +303,15 @@ p{
 }
 
 .lightbox-prev {
-    left: 0; /* Place la flèche à gauche du contenu */
+    left: -15px; /* Place la flèche à gauche du contenu */
 }
 
 .lightbox-next {
-    right: 0; /* Place la flèche à droite du contenu */
+    right: -15px; /* Place la flèche à droite du contenu */
 }
 
 .lightbox-media {
-    max-width: calc(100% - 200px); /* Prend en compte le padding de chaque côté */
+    /*max-width: calc(100% - 200px); /* Prend en compte le padding de chaque côté */
     max-height: 70vh;
     margin: 0 auto; /* Centre horizontalement */
     padding: 0 20px; /* Espace de 20px de chaque côté de l'image */
@@ -332,7 +333,7 @@ p{
     color: #901C1C; /* Couleur du texte de la légende */
     font-size: 1.2em;
     text-align: left; /* Aligne la légende à gauche */
-    margin-left: 100px; /* Aligne la légende avec l'image */
+    margin-left: 20px; /* Aligne la légende avec l'image */
 }
 
 /* Modale */

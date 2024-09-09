@@ -177,6 +177,9 @@ function initializeLightbox() {
         closeButton.addEventListener('click', closeLightbox);
     }
 
+    document.querySelector('.lightbox-prev').addEventListener('click', showPreviousMedia);
+    document.querySelector('.lightbox-next').addEventListener('click', showNextMedia);
+
     // Navigation au clavier dans la lightbox
     document.addEventListener('keydown', (e) => {
         if (lightbox.getAttribute('aria-hidden') === 'false') {

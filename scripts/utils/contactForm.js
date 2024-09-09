@@ -12,10 +12,10 @@ function displayModal() {
     // Focus ciblé dans le modal
     const focusableElements = modal.querySelectorAll('button, input, textarea, [tabindex]:not([tabindex="-1"])');
     const firstFocusableElement = focusableElements[0];
-    const lastFocusableElement = focusableContent[focusableContent.length - 1];
+    const lastFocusableElement = focusableElements[focusableElements.length - 1];  // Correction de 'focusableContent'
 
     // Assurez-vous que le focus est ciblé dans le modal
-    modalContent.addEventListener('keydown', function(e) {
+    modal.addEventListener('keydown', function(e) { // Correction de 'modalContent'
         if (e.key === 'Tab' || e.keyCode === 9) {
             // si la touche Maj est enfoncée pour la combinaison Maj + Tabulation
             if (e.shiftKey) { 
@@ -52,3 +52,6 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.querySelector('.modal header img').addEventListener('click', closeModal);
+
+// Bind the event to open the modal when clicking on the contact button
+document.querySelector('.contact_button').addEventListener('click', displayModal);

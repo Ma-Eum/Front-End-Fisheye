@@ -1,6 +1,10 @@
 // Code JavaScript lié à la page photographer.html
 
-function photographerTemplate(data) {
+// Import de la fonction mediaFactory
+import { mediaFactory } from '../moduls/mediaFactory.js'; 
+
+// Ajout de 'export' pour rendre la fonction réutilisable
+export function photographerTemplate(data) {
     const { name, portrait, city, country, tagline, price } = data;
     const picture = `assets/images/Photos/${portrait}`;
 
@@ -234,6 +238,9 @@ document.addEventListener('DOMContentLoaded', function () {
             selectContainer.classList.remove('select-active');
         }
     });
+
+    // Lier la fonction displayModal au clic du bouton de contact
+    document.querySelector('.contact_button').addEventListener('click', displayModal);
 
     // Charger les données initialement avec le tri par popularité
     displayPhotographerData('popularity');

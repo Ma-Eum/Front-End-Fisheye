@@ -206,7 +206,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const optionsContainer = document.querySelector('.select-options');
     const options = Array.from(document.querySelectorAll('.select-option'));
 
+    // Gestion de l'ouverture / fermeture du menu
     selected.addEventListener('click', function () {
+
+        const isExpanded = selected.getAttribute('aria-expanded')==='true';
+        selected.setAttribute('aria-expanded',!isExpanded);
+        selectContainer.classList.toggle('select-active');
+        optionsContainer.style.display=selectContainer.classList.contains('select-active')? 'flex':'none';
+
         // Supprimer l'option actuellement sélectionnée de la liste des options
         optionsContainer.innerHTML = '';
         const currentValue = selected.getAttribute('data-value');
@@ -220,10 +227,21 @@ document.addEventListener('DOMContentLoaded', function () {
         selectContainer.classList.toggle('select-active');
     });
 
+    selected.addEventListener('keydown',function(e){
+        if(e.key === 'Enter'  || e.key === ' '){
+            e.preventDefault();
+            selected.click(); //Simule un clic pour ouvrir/fermer
+        }
+    });
+
     options.forEach(option => {
         option.addEventListener('click', function () {
             selected.innerHTML = this.innerHTML + '<span class="select-arrow">▼</span>';
             selected.setAttribute('data-value', this.getAttribute('data-value'));
+            selected.setAttribute('aria-expanded','false');
+            optionsContainer.style.display='none';
+            options.forEach(opt=>opt.setAttribute('aira-selected','false'));
+            this.setAttribute('aria-selected','true');
             selectContainer.classList.remove('select-active');
             // Effectuez votre logique de tri ici en fonction de la valeur sélectionnée
 
@@ -232,10 +250,31 @@ document.addEventListener('DOMContentLoaded', function () {
             displayPhotographerData(sortCriteria);
         });
 
+        // Gestion des interactions clavier dans les options
+        option.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click(); // Simule un clic pour sélectionner l'option
+            }
+        });
     });
+
+    // Fermer le mun si l'utilisateur clique à l'extérieur
        document.addEventListener('click', function (e) {
         if (!selectContainer.contains(e.target)) {
             selectContainer.classList.remove('select-active');
+            selected.setAttribute('aria-expanded', 'false');
+            optionsContainer.style.display = 'none';
+        }
+    });
+    
+    // Fermer avec "Escape" si le menu est ouvert
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && selectContainer.classList.contains('select-active')) {
+            selectContainer.classList.remove('select-active');
+            selected.setAttribute('aria-expanded', 'false');
+            optionsContainer.style.display = 'none';
+            selected.focus(); // Remet le focus sur le sélecteur
         }
     });
 

@@ -126,7 +126,7 @@ p{
 }
     
 .select-options {
-    display: none;
+    display: none; /* Par défaut, les options sont masquées */
     flex-direction: column;
     position: absolute;
     top: 100%;  /* Garantit que les options déroulantes apparaissent sous l'élément sélectionné */
@@ -161,12 +161,16 @@ p{
 }
 
 .select-active .select-options {
-    display: flex;
+    display: flex; /* Afficher les options quand le sélecteur est actif */
     border-radius: 0 0 5px 5px; 
 }
 
 .select-active .select-arrow {
     transform: rotate(180deg);
+}
+
+.select-option[aria-selected="true"]{
+    background-color: #D3573C; /* Option sélectionnée en surbrillance */
 }
 
 .media-gallery {

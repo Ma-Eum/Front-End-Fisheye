@@ -10,7 +10,6 @@ export function mediaFactory(media) {
             function getMediaDOM() {
                 const article = document.createElement('article');
                 article.classList.add('media-item');
-                article.setAttribute('tabindex', '0'); // Rendre l'article focusable
         
                 let mediaElement;
         

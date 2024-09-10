@@ -12,8 +12,8 @@
 <body>
     <header>
         <a href="index.html" aria-label="Retour à la page d'accueil">
-            <img src="assets/images/logo.png" class="logo" alt="Fisheye logo">
-        </a>
+            <img src="assets/images/logo.png" class="logo" alt="Logo de Fisheye, retour à la page d'accueil">
+        </a>        
     </header>
 
     <main id="main" tabindex="-1">
@@ -38,7 +38,7 @@
                 <span>Trier par</span>
                 <div class="custom-select" id="sort-options" role="listbox" aria-label="Trier par options">
                     <div class="select-selected" data-value="popularity"  tabindex="0" role="button" aria-expanded="false">Popularité
-                        <i class="fas fa-angle-down select-arrow"></i>
+                        <span class="fas fa-angle-down select-arrow"></span>
                     </div>
                     <div class="select-options">
                         <div class="select-option" data-value="popularity" tabindex="0" role="option" aria-selected="false">Popularité</div>
@@ -66,36 +66,37 @@
     <div id="lightbox_modal" class="lightbox" aria-hidden="true" role="dialog" tabindex="-1">
         <div class="lightbox-content">
             <button class="lightbox-close" aria-label="Fermer la Lightbox" tabindex="0">
-                <i class="fa-solid fa-xmark"></i>
+                <span class="fa-solid fa-xmark"></span>
             </button>
             <div class="lightbox-media-container">
                 <button class="lightbox-prev" aria-label="Média précédent" tabindex="0">
-                    <i class="fa-solid fa-chevron-left"></i>
+                    <span class="fa-solid fa-chevron-left"></span>
                 </button>
                 <div class="lightbox-media" role="document">
                     <!-- Media will be dynamically inserted here -->
                 </div>
                 <button class="lightbox-next" aria-label="Média suivant" tabindex="0">
-                    <i class="fa-solid fa-chevron-right"></i>
+                    <span class="fa-solid fa-chevron-right"></span>
                 </button>
             </div>
             <p class="lightbox-caption"></p>
         </div>
     </div>
     
-
     <div id="contact_modal" class="modal" role="dialog" aria-labelledby="contact-modal-title" aria-hidden="true">
         <div class="modal-content">
             <header>
                 <h2 id="contact-modal-title">Contactez-moi</h2>
-                <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la modale" tabindex="0">
+                <button onclick="closeModal()" aria-label="Fermer la modale" tabindex="0">
+                    <img src="assets/icons/close.svg" alt="">
+                </button>
             </header>
             <!-- Nom du photographe -->
             <p id="photographer-name-modal"></p>
             <form>
                 <div>
                     <label for="first-name">Prénom</label>
-                    <input type="text" id="first-name" name="first-name" aria-label="Ecrire votre Prenom" tabindex="0" required>
+                    <input type="text" id="first-name" name="first-name" tabindex="0" required>
                 </div>
                 <div>
                     <label for="last-name">Nom</label>
@@ -114,7 +115,7 @@
         </div>
     </div>
 
-    <script src="scripts/moduls/mediaFactory.js"></script>
+    <script type="module" src="scripts/moduls/mediaFactory.js"></script>
     <script type="module" src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
 </body>

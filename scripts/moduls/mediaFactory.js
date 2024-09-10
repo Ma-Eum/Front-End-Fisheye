@@ -2,10 +2,6 @@
 export function mediaFactory(media) {
             const { title, image, video, likes } = media;
             let totalLikes = likes;
-            // const objetClaire = {name: 'claire',profession:'developpeur web',langue:'francais'};
-            // const listClaire=[1,2,3,4,5];
-            // const listeObjet=[{name:'malek',profession:'dev'},{}];
-            // console.log(media); 
         
             function getMediaDOM() {
                 const article = document.createElement('article');

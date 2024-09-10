@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function () {
     selected.addEventListener('keydown',function(e){
         if(e.key === 'Enter'  || e.key === ' '){
             e.preventDefault();
-            selected.click(); //Simule un clic pour ouvrir/fermer
+            selected.click(); //Simule un clic pour ouvrir
         }
     });
 
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Fermer le mun si l'utilisateur clique à l'extérieur
+    // Fermer le menu si l'utilisateur clique à l'extérieur
        document.addEventListener('click', function (e) {
         if (!selectContainer.contains(e.target)) {
             selectContainer.classList.remove('select-active');

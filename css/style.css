@@ -59,7 +59,7 @@ a{
     margin-bottom: 0;
 }
 
-.photographer_section article .image-container {
+.photographer_section article, .image-container {
     height: 200px;
     width: 200px;
     overflow: hidden;

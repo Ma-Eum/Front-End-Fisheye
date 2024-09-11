@@ -249,9 +249,35 @@ document.addEventListener('DOMContentLoaded', function () {
 function displayModal() {
     const photographerName = document.querySelector('.photographer-name').textContent;
     document.getElementById('photographer-name-modal').textContent = photographerName;
+
+    // Affiche la modal et l'overlay
     document.getElementById('contact_modal').style.display = "block";
+    document.getElementById('modal-overlay').style.display = "block";
+
+    // Empêche le scroll et les clics sur le fond
+    document.body.classList.add('modal-open');
     document.querySelector('.modal').focus();
 }
+
+// Fonction pour fermer la modale de contact
+function closeModal() {
+    document.getElementById('contact_modal').style.display = 'none';
+    document.getElementById('modal-overlay').style.display = 'none';
+
+    // Réautorise le scroll
+    document.body.classList.remove('modal-open');
+}
+
+// Attache les événements de fermeture de la modale
+document.getElementById('modal-overlay').addEventListener('click', closeModal);
+document.querySelector('.modal header button').addEventListener('click', closeModal);
+
+// Écoute de l'événement 'keydown' pour détecter la touche Escape et fermer la modale
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        closeModal();    
+    }
+});
 
 // Gestion de la soumission du formaulaire de contact
 document.querySelector('.modal form').addEventListener('submit', function(event) {

@@ -343,17 +343,38 @@ p{
 }
 
 /* Modale */
+
+/* Overlay semi-transparent */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent (noir à 50%) */
+    z-index: 1000; /* Juste derrière la modale */
+    display: none; /* Caché par défaut */
+}
+
 .modal {
-    position: absolute;
-    top: 66%;
+    position: fixed;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 60%;
+    max-width: 90vw; /* Largeur maximale de 90% de la fenêtre */
+    max-height: 90vh; /* Hauteur maximale de 90% de la fenêtre */
+    height: auto;
+    overflow: auto; /* Permet le défilement si le contenu dépasse */
     border-radius: 5px;
     background-color: #DB8876;
-    width: 70%;
     padding: 35px;
-    margin: auto;
-    z-index: 1000;
+    z-index: 1001;
+}
+
+/* Empêche le clic sur l'arrière-plan (l'overlay est déjà en place) */
+body.modal-open {
+    overflow: hidden; /* Désactive le scroll quand la modale est ouverte */
 }
 
 .modal-content {
@@ -366,6 +387,13 @@ p{
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    background-color: #DB8876;
+}
+
+.modal header button{
+    
+    background-color: #DB8876;
+    border: none;
 }
 
 .modal header img {

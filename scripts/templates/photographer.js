@@ -8,7 +8,6 @@
         const link = document.createElement('a');
         link.setAttribute('href', `photographer.html?id=${id}`);
         link.setAttribute('aria-label', `Voir la page de ${name}`);
-        console.log(`Lien généré : photographer.html?id=${id}`);
 
         const imageContainer = document.createElement('div');
         imageContainer.classList.add('image-container');
